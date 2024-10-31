@@ -65,8 +65,7 @@ services:
     
   
   webserver:
-    image: apache/airflow:2.6.0-python3.9
-    command: webserver
+    image: apache/airflow:2.10.2-python3.9
     entrypoint: ['/opt/airflow/script/entrypoint.sh']
     depends_on:
       - postgres
@@ -84,14 +83,13 @@ services:
       - confluent
 
   scheduler:
-    image: apache/airflow:2.6.0-python3.9
+    image: apache/airflow:2.10.2-python3.9
     command: bash -c "pip install -r ./requirements.txt && airflow db upgrade && airflow scheduler"
     depends_on:
       webserver:
         condition: service_healthy
     volumes:
       - ./dags:/opt/airflow/dags
-      - ./script/entrypoint.sh:/opt/airflow/script/entrypoint.sh
       - ./requirements.txt:/opt/airflow/requirements.txt
     environment:
       AIRFLOW__CORE__LOAD_EXAMPLES: 'false'

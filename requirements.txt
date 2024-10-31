@@ -1,0 +1,5 @@
+apache-airflow==2.10.2
+kafka-python==2.0.2
+requests==2.32.3
+cassandra-driver==3.29.2
+pyspark==3.5.2
